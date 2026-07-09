@@ -1,0 +1,402 @@
+
+
+* {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family: "Courier New", monospace;
+
+    background:
+    radial-gradient(circle at top,#003300,black 50%);
+
+}
+
+
+/* Neon Text */
+
+h1,h2 {
+
+    text-shadow:
+    0 0 10px #00ff66,
+    0 0 20px #00ff66;
+
+}
+
+
+/* Glass Cards */
+
+.bg-black\/40 {
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+}
+
+
+/* Smooth Fade */
+
+.animate-fade {
+
+    animation: fadeIn 1s ease-in-out;
+
+}
+
+
+@keyframes fadeIn {
+
+from {
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+/* Scan Line Animation */
+
+.scan-line {
+
+
+animation: scan 4s linear infinite;
+
+}
+
+
+@keyframes scan {
+
+
+0% {
+
+top:0;
+
+opacity:0;
+
+}
+
+
+20% {
+
+opacity:1;
+
+}
+
+
+50% {
+
+top:50%;
+
+}
+
+
+100% {
+
+top:100%;
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+
+/* Matrix Background */
+
+.matrix-rain {
+
+
+background-image:
+
+linear-gradient(
+180deg,
+transparent 0%,
+rgba(0,255,80,.15) 50%,
+transparent 100%
+);
+
+
+animation: matrix 5s linear infinite;
+
+}
+
+
+@keyframes matrix {
+
+
+from {
+
+transform:translateY(-100%);
+
+}
+
+
+to {
+
+transform:translateY(100%);
+
+}
+
+
+}
+
+
+
+/* Neon Border Animation */
+
+
+table tbody tr {
+
+
+transition:all .3s ease;
+
+
+}
+
+
+table tbody tr:hover {
+
+
+background:rgba(0,255,80,.1);
+
+box-shadow:
+
+0 0 20px #00ff66;
+
+
+transform:scale(1.01);
+
+
+}
+
+
+
+
+/* Scroll Bar */
+
+
+::-webkit-scrollbar {
+
+
+width:10px;
+
+
+}
+
+
+::-webkit-scrollbar-track {
+
+
+background:#000;
+
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+
+background:#00ff66;
+
+border-radius:20px;
+
+box-shadow:
+
+0 0 20px #00ff66;
+
+
+}
+
+
+
+/* Chart Glow */
+
+
+canvas {
+
+
+filter:
+
+drop-shadow(0 0 15px rgba(0,255,100,.5));
+
+
+}
+
+
+
+/* Pulsing Status */
+
+
+#threat {
+
+
+animation:
+
+threatPulse 1.5s infinite;
+
+
+}
+
+
+@keyframes threatPulse {
+
+
+0% {
+
+box-shadow:
+
+0 0 10px red;
+
+}
+
+
+50% {
+
+box-shadow:
+
+0 0 40px red;
+
+}
+
+
+100% {
+
+box-shadow:
+
+0 0 10px red;
+
+}
+
+
+}
+
+
+
+/* Hacker Cursor */
+
+
+body {
+
+
+cursor:crosshair;
+
+
+}
+
+
+
+/* Card Hover */
+
+
+.group {
+
+
+position:relative;
+
+overflow:hidden;
+
+
+}
+
+
+.group::before {
+
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-100%;
+
+width:50%;
+
+height:100%;
+
+
+background:
+
+linear-gradient(
+120deg,
+transparent,
+rgba(0,255,100,.3),
+transparent
+);
+
+
+transition:.5s;
+
+
+}
+
+
+.group:hover::before {
+
+
+left:150%;
+
+
+}
+
+
+
+
+/* Footer Glow */
+
+
+footer {
+
+
+animation:
+
+footerGlow 3s infinite alternate;
+
+
+}
+
+
+@keyframes footerGlow {
+
+
+from {
+
+
+box-shadow:
+
+0 0 20px rgba(0,255,100,.2);
+
+
+}
+
+
+to {
+
+
+box-shadow:
+
+0 0 50px rgba(0,255,100,.5);
+
+
+}
+
+
+}

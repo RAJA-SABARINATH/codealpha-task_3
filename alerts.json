@@ -1,0 +1,18 @@
+[
+  {
+    "time": "21:29:51",
+    "type": "HTTP",
+    "message": "HTTP Traffic Detected",
+    "source": "192.168.1.8",
+    "destination": "142.250.182.14",
+    "severity": "Medium"
+  },
+  {
+    "time": "21:27:06",
+    "type": "ICMP",
+    "message": "ICMP Ping Detected",
+    "source": "192.168.1.1",
+    "destination": "192.168.1.8",
+    "severity": "Low"
+  }
+]

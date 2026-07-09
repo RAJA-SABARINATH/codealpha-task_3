@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Network IDS Dashboard</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="bg-black text-white overflow-x-hidden">
+
+<!-- Hacker Background -->
+
+<div class="fixed inset-0 -z-10 overflow-hidden">
+
+<div class="absolute inset-0 bg-gradient-to-br from-black via-green-950 to-black"></div>
+
+<div class="absolute top-0 left-0 w-full h-full opacity-10">
+
+<div class="matrix-rain"></div>
+
+</div>
+
+<div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-green-500 rounded-full blur-[220px] opacity-20 animate-pulse"></div>
+
+<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-green-400 rounded-full blur-[250px] opacity-20 animate-pulse"></div>
+
+<div class="absolute inset-0 bg-[radial-gradient(circle,#00ff5530_1px,transparent_1px)] bg-[length:40px_40px] opacity-20"></div>
+
+</div>
+
+<!-- Scan Line -->
+
+<div class="scan-line fixed top-0 left-0 w-full h-1 bg-green-400 opacity-30 z-50"></div>
+
+<!-- NAVBAR -->
+
+<nav class="sticky top-0 z-50 backdrop-blur-xl bg-black/40 border-b border-green-500/30 shadow-[0_0_40px_rgba(0,255,100,.4)]">
+
+<div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
+
+<div>
+
+<h1 class="text-4xl font-extrabold tracking-widest text-green-400 drop-shadow-[0_0_15px_#00ff66]">
+
+🛡 NETWORK IDS
+
+</h1>
+
+<p class="text-green-300 text-sm">
+
+Cyber Security Monitoring Dashboard
+
+</p>
+
+</div>
+
+<div class="flex items-center gap-4">
+
+<div class="flex items-center gap-2">
+
+<span class="h-3 w-3 rounded-full bg-green-400 animate-ping"></span>
+
+<span class="h-3 w-3 rounded-full bg-green-400 absolute"></span>
+
+<span class="text-green-400 font-bold tracking-widest">
+
+LIVE
+
+</span>
+
+</div>
+
+<div id="clock"
+class="px-5 py-2 rounded-xl bg-black/40 border border-green-500/30 text-green-400 font-mono shadow-[0_0_20px_#00ff66]">
+
+00:00:00
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- DASHBOARD -->
+
+<div class="max-w-7xl mx-auto p-8 animate-fade">
+
+<!-- SUMMARY -->
+ <!-- SUMMARY -->
+
+<div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+
+<div class="group bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-7 hover:scale-105 transition-all duration-500 shadow-[0_0_25px_rgba(0,255,100,.25)] hover:shadow-[0_0_60px_#00ff66]">
+
+<p class="text-green-300 uppercase tracking-widest text-sm">
+Total Alerts
+</p>
+
+<h1 id="totalAlerts"
+class="text-6xl font-extrabold mt-5 text-green-400 drop-shadow-[0_0_15px_#00ff55]">
+0
+</h1>
+
+<p class="mt-4 text-green-500">
+▲ Live Count
+</p>
+
+</div>
+
+<div class="group bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-7 hover:scale-105 transition-all duration-500 shadow-[0_0_25px_rgba(0,255,100,.25)] hover:shadow-[0_0_60px_#00ff66]">
+
+<p class="text-green-300 uppercase tracking-widest text-sm">
+ICMP Attacks
+</p>
+
+<h1 id="icmpCount"
+class="text-6xl font-extrabold mt-5 text-lime-400 drop-shadow-[0_0_15px_#00ff55]">
+0
+</h1>
+
+<p class="mt-4 text-green-500">
+Ping Detection
+</p>
+
+</div>
+
+<div class="group bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-7 hover:scale-105 transition-all duration-500 shadow-[0_0_25px_rgba(0,255,100,.25)] hover:shadow-[0_0_60px_#00ff66]">
+
+<p class="text-green-300 uppercase tracking-widest text-sm">
+HTTP Requests
+</p>
+
+<h1 id="httpCount"
+class="text-6xl font-extrabold mt-5 text-emerald-400 drop-shadow-[0_0_15px_#00ff55]">
+0
+</h1>
+
+<p class="mt-4 text-green-500">
+Traffic Monitor
+</p>
+
+</div>
+
+<div class="group bg-black/40 backdrop-blur-xl border border-red-500/40 rounded-3xl p-7 hover:scale-105 transition-all duration-500 shadow-[0_0_25px_rgba(255,0,0,.25)] hover:shadow-[0_0_60px_red]">
+
+<p class="text-red-300 uppercase tracking-widest text-sm">
+Threat Level
+</p>
+
+<h1 class="text-5xl font-extrabold text-red-500 mt-5 animate-pulse">
+
+HIGH
+
+</h1>
+
+<p class="mt-4 text-red-400">
+Monitoring Active
+</p>
+
+</div>
+
+</div>
+
+<!-- Charts -->
+
+<div class="grid lg:grid-cols-2 gap-8 mt-10">
+
+<div class="bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,255,100,.25)]">
+
+<h2 class="text-2xl font-bold text-green-400 mb-6">
+
+📊 Attack Statistics
+
+</h2>
+
+<canvas id="attackChart" height="140"></canvas>
+
+</div>
+
+<div class="bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,255,100,.25)]">
+
+<h2 class="text-2xl font-bold text-green-400 mb-6">
+
+🎯 Attack Distribution
+
+</h2>
+
+<canvas id="pieChart" height="140"></canvas>
+
+</div>
+
+</div>
+
+<div class="mt-10 bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,255,100,.25)]">
+
+<h2 class="text-2xl font-bold text-green-400 mb-6">
+
+📈 Live Network Traffic
+
+</h2>
+
+<canvas id="lineChart"></canvas>
+
+</div>
+
+<!-- Alerts -->
+
+<div class="mt-10 bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,255,100,.25)]">
+
+<div class="flex justify-between items-center mb-8">
+
+<h2 class="text-3xl font-bold text-green-400">
+
+⚠ Recent Intrusion Alerts
+
+</h2>
+
+<span id="threat"
+class="px-6 py-3 rounded-full bg-red-600 font-bold animate-pulse shadow-[0_0_20px_red]">
+
+HIGH THREAT
+
+</span>
+
+</div>
+
+<div class="overflow-x-auto">
+
+<table class="w-full">
+
+<thead>
+
+<tr class="border-b border-green-700 text-green-400">
+
+<th class="p-4">Time</th>
+
+<th class="p-4">Attack Type</th>
+
+<th class="p-4">Description</th>
+
+<th class="p-4">Severity</th>
+
+</tr>
+
+</thead>
+
+<tbody id="alertTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+<!-- FOOTER -->
+ <!-- FOOTER -->
+
+<footer class="mt-12 relative overflow-hidden bg-black/40 backdrop-blur-xl border border-green-500/30 rounded-3xl shadow-[0_0_60px_rgba(0,255,100,.3)] p-10">
+
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle,#00ff55_1px,transparent_1px)] bg-[length:25px_25px]"></div>
+
+<div class="relative text-center">
+
+<h2 class="text-3xl font-extrabold text-green-400 tracking-widest drop-shadow-[0_0_15px_#00ff66]">
+
+🛡 NETWORK INTRUSION DETECTION SYSTEM
+
+</h2>
+
+<p class="mt-5 text-green-300">
+
+Real-Time Threat Monitoring Dashboard for Enchanced cybersecurity
+
+</p>
+
+<div class="flex justify-center gap-6 mt-8 flex-wrap">
+
+<div class="px-5 py-3 rounded-xl border border-green-500/30 bg-black/40 shadow-[0_0_20px_rgba(0,255,100,.3)]">
+
+✔ Live Monitoring
+
+</div>
+
+<div class="px-5 py-3 rounded-xl border border-green-500/30 bg-black/40 shadow-[0_0_20px_rgba(0,255,100,.3)]">
+
+✔ Intrusion Detection
+
+</div>
+
+<div class="px-5 py-3 rounded-xl border border-green-500/30 bg-black/40 shadow-[0_0_20px_rgba(0,255,100,.3)]">
+
+✔ Real-Time Alerts
+
+</div>
+
+<div class="px-5 py-3 rounded-xl border border-green-500/30 bg-black/40 shadow-[0_0_20px_rgba(0,255,100,.3)]">
+
+✔ Traffic Analytics
+
+</div>
+
+</div>
+
+<div class="mt-10 border-t border-green-500/20 pt-6">
+
+<p class="text-lg text-green-400 font-bold">
+
+Developed by Raja Sabarinath
+
+</p>
+
+<p class="text-green-300 mt-2">
+
+CodeAlpha Cyber Security Internship 2026
+
+</p>
+
+<p class="text-green-600 mt-4 text-sm">
+
+"Protect • Detect • Respond"
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- Floating Neon Lights -->
+
+<div class="fixed top-20 left-10 w-72 h-72 rounded-full bg-green-500 blur-[180px] opacity-20 pointer-events-none animate-pulse -z-10"></div>
+
+<div class="fixed bottom-10 right-10 w-96 h-96 rounded-full bg-green-400 blur-[220px] opacity-20 pointer-events-none animate-pulse -z-10"></div>
+
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-green-500 blur-[320px] opacity-5 pointer-events-none -z-10"></div>
+
+<script>
+
+function updateClock(){
+
+const now=new Date();
+
+document.getElementById("clock").innerHTML=
+now.toLocaleTimeString();
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
